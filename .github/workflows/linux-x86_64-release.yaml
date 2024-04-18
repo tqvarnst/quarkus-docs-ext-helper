@@ -1,0 +1,45 @@
+name: Linux x86_64 release
+
+on:
+  release:
+    types: [created] 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest 
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: graalvm/setup-graalvm@v1
+      with:
+        java-version: '21'
+        distribution: 'graalvm' # See 'Options' for all available distributions
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: cache ~/.m2
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    # Not needed anymore since mvn release:prepare and mvn release:perform takes care of fixing the version
+    #- name: Set version
+    #  run: ./mvnw versions:set -DnewVersion="${{ github.event.release.tag_name }}"
+    - name: Build native executable
+      run: ./mvnw package -Dnative
+    - name: Get version
+      shell: bash -l {0}
+      run: echo project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
+    - name: Get artifactId
+      shell: bash -l {0}
+      run: echo project_artifactId=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout) >> $GITHUB_ENV
+    - name: Upload native executable
+      id: upload-native-executable
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./target/${{env.project_artifactId}}-${{env.project_version}}-runner
+        asset_name: quarkus-doc-ext-helper-x86_64
+        asset_content_type: application/octet-stream
