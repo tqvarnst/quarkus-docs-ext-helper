@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest 
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - uses: graalvm/setup-graalvm@v1
       with:
         java-version: '21'
         distribution: 'graalvm' # See 'Options' for all available distributions
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: cache ~/.m2
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
@@ -41,5 +41,5 @@ jobs:
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: ./target/${{env.project_artifactId}}-${{env.project_version}}-runner
-        asset_name: quarkus-doc-ext-helper-x86_64
+        asset_name: quarkus-doc-ext-helper-linux-x86_64
         asset_content_type: application/octet-stream

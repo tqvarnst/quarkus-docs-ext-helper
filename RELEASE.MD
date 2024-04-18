@@ -11,10 +11,10 @@
 
 `./mvnw release:perform -Darguments="-Dmaven.deploy.skip=true"`
 
-4. Go to https://github.com/tqvarnst/rhbq-supported-extension-generator/releases and click **Draft a new release**
+4. Go to https://github.com/tqvarnst/quarkus-docs-ext-helper/releases and click **Draft a new release**
 5. Choose the recently created tag for the version you released.
 6. Give it a good title (e.g. release number X.Y.Z) and a good description of what is new in the release
 7. Click publish release
-8. Go to https://github.com/tqvarnst/rhbq-supported-extension-generator/actions and wait for the work to complete
+8. Go to https://github.com/tqvarnst/quarkus-docs-ext-helper/actions and wait for the work to complete
 9. You will have to manually upload a MacOS aarch64 binary by building locally and upload it to the release.
 
