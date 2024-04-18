@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redhat.quarkus</groupId>
   <artifactId>quarkus-docs-ext-helper</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <scm>
     <connection>scm:git:git://github.com/tqvarnst/quarkus-docs-ext-helper.git</connection>
     <developerConnection>scm:git:git@github.com:tqvarnst/quarkus-docs-ext-helper.git</developerConnection>
     <url>http://github.com/tqvarnst/quarkus-docs-ext-helper</url>
-    <tag>quarkus-docs-ext-helper-1.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
   <properties>
     <compiler-plugin.version>3.12.1</compiler-plugin.version>
