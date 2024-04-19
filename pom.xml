@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redhat.quarkus</groupId>
   <artifactId>quarkus-docs-ext-helper</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
   <scm>
     <connection>scm:git:git://github.com/tqvarnst/quarkus-docs-ext-helper.git</connection>
     <developerConnection>scm:git:git@github.com:tqvarnst/quarkus-docs-ext-helper.git</developerConnection>
