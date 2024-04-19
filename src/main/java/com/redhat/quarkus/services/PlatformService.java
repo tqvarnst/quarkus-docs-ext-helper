@@ -5,7 +5,10 @@ import com.redhat.quarkus.models.ExtensionSupport;
 import com.redhat.quarkus.models.Platform;
 import com.redhat.quarkus.models.Release;
 import com.redhat.quarkus.models.Stream;
+import com.redhat.quarkus.utils.QuietArtifactResolverFactory;
+import com.redhat.quarkus.utils.QuietResolver;
 import io.quarkus.bootstrap.resolver.maven.MavenArtifactResolver;
+import io.quarkus.devtools.messagewriter.MessageWriter;
 import io.quarkus.logging.Log;
 import io.quarkus.maven.ArtifactCoords;
 import io.quarkus.registry.ExtensionCatalogResolver;
@@ -31,8 +34,12 @@ public class PlatformService {
     @RestClient
     PlatformVersionRestClient restClient;
 
+//    @Inject
+//    @QuietResolver
+//    MavenArtifactResolver artifactResolver;
+
     @Inject
-    MavenArtifactResolver artifactResolver;
+    QuietArtifactResolverFactory artifactResolverFactory;
 
     public List<String> getVersions() {
         Platform rhbqPlatform = restClient.getAllPlatforms().getPlatforms().getFirst();
@@ -66,6 +73,7 @@ public class PlatformService {
     }
 
     private ExtensionCatalogResolver getCatalogResolver() throws RegistryResolutionException {
+            MavenArtifactResolver artifactResolver = artifactResolverFactory.produce();
             return ExtensionCatalogResolver.builder()
                     .artifactResolver(artifactResolver)
                     .config(getRegistriesConfig())
