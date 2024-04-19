@@ -34,9 +34,9 @@ public class PlatformService {
     @RestClient
     PlatformVersionRestClient restClient;
 
-//    @Inject
-//    @QuietResolver
-//    MavenArtifactResolver artifactResolver;
+    @Inject
+    @QuietResolver
+    MavenArtifactResolver artifactResolver;
 
     @Inject
     QuietArtifactResolverFactory artifactResolverFactory;
@@ -73,7 +73,6 @@ public class PlatformService {
     }
 
     private ExtensionCatalogResolver getCatalogResolver() throws RegistryResolutionException {
-            MavenArtifactResolver artifactResolver = artifactResolverFactory.produce();
             return ExtensionCatalogResolver.builder()
                     .artifactResolver(artifactResolver)
                     .config(getRegistriesConfig())

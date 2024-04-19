@@ -18,6 +18,8 @@ public class QuietArtifactResolverFactory {
     @Inject
     MavenArtifactResolver artifactResolver;
 
+    @Produces
+    @QuietResolver
     public MavenArtifactResolver produce()  {
         Log.info("Using the Quiet MavenArtifactResolver");
         try {
