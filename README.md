@@ -1,67 +1,26 @@
 # quarkus-docs-ext-helper
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project provides a helper tool to help list the support level of an extension in Red Hat build of Quarkus
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Usage
 
-## Running the application in dev mode
+_This sections assums you have installed and and have quarkus-docs-ext-helper on your path_
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
-```
+To check if for example `quarkus-resteasy-reactive` is supported in Red Hat build of Quarkus 3.2 
+(support status of the latest version in that stream will be used) you can for example use
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+    quarkus-docs-ext-helper -S 3.2 -e quarkus-resteasy-reactive
 
-## Packaging and running the application
+You can also use pipes with xargs like this:
 
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+    echo "quarkus-resteasy-reactive" | xargs quarkus-docs-ext-helper -S 3.2 -e
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+## Installation
 
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
-```
+1. Download the latest release from https://github.com/tqvarnst/quarkus-docs-ext-helper/releases matching your OS and CPU architecture
+2. Copy the file to a directory that is part of your PATH, for example `/usr/local/bin`
+3. Make the file executable `sudo chmod +x /usr/local/bin/quarksu-docs-ext-helper`
+4. For Mac OS users, you might have to remove the quarantine that Apple enforces on unidentified applications using
+`sudo xattr -r -d /usr/local/bin/com.apple.quarantine quarkus-docs-ext-helper`
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/docs-ext-helper-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Related Guides
-
-- Picocli ([guide](https://quarkus.io/guides/picocli)): Develop command line applications with Picocli
-
-## Provided Code
-
-### Picocli Example
-
-Hello and goodbye are civilization fundamentals. Let's not forget it with this example picocli application by changing the <code>command</code> and <code>parameters</code>.
-
-[Related guide section...](https://quarkus.io/guides/picocli#command-line-application-with-multiple-commands)
-
-Also for picocli applications the dev mode is supported. When running dev mode, the picocli application is executed and on press of the Enter key, is restarted.
-
-As picocli applications will often require arguments to be passed on the commandline, this is also possible in dev mode via:
-```shell script
-./mvnw compile quarkus:dev -Dquarkus.args='Quarky'
-```
